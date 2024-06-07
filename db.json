@@ -1,0 +1,94 @@
+{
+  "user": [
+    {
+      "id": "rpm",
+      "name": "rpm",
+      "password": "$2a$10$d2MFJBxgoUCR/S6Q9Qhml.0VlNYLzXp/NOqcjsiKaI4assQcOjcma",
+      "email": "rp@g.c",
+      "phone": "2233232323",
+      "country": "india",
+      "address": "dd",
+      "gender": "female"
+    },
+    {
+      "id": "Nil",
+      "name": "abcd",
+      "password": "$2a$10$e/WZimQieEDmb95/hRrwdOtVd/9kbDcP9JrurXntCuoVtxWtXdnje",
+      "email": "mnaa@gmail.com",
+      "phone": "8888965714",
+      "country": "india",
+      "address": "Nashik\nnsk",
+      "gender": "male"
+    }
+  ],
+  "user2": [
+    {
+      "id": "rp",
+      "name": "rpm",
+      "password": "$2a$10$.Fwx8n7Q.P/orIZkPP8MnOsrXSYkZffj94v49XLoE6qwIvKR4GSS6",
+      "email": "r@g.c",
+      "phone": "223322323",
+      "country": "india",
+      "address": "ced",
+      "gender": "female"
+    }
+  ],
+  "customer": [
+    {
+      "id": "df24",
+      "own": "Nilesh",
+      "vno": "MH152475",
+      "rcbook": "433",
+      "bikerh": "20"
+    }
+  ],
+  "updateStatus": [
+    {
+      "id": "abcf",
+      "status": "Accepted"
+    },
+    {
+      "id": "abcf",
+      "status": "Accepted"
+    },
+    {
+      "id": "abcf",
+      "status": "Accepted"
+    }
+  ],
+  "feed": [
+    {
+      "id": "aecf",
+      "fname": "reshu",
+      "lname": "patil",
+      "email": "r@gm.c",
+      "texta": "jkdcuh"
+    }
+  ],
+  "form": [
+    {
+      "id": "abcf",
+      "custname": "Deu",
+      "dob": "2024-03-08",
+      "qty": "3",
+      "rate": "",
+      "amt": 12,
+      "status": ""
+    }
+  ],
+  "payment": [
+    {
+      "id": "45d3",
+      "cardn": "23322",
+      "ed": "23",
+      "email": "d@g.c",
+      "cv": "21312",
+      "pass": "ds",
+      "add": "asd",
+      "ad": "asd",
+      "city": "ad",
+      "state": "Rajasthan",
+      "zip": "sadc"
+    }
+  ]
+}

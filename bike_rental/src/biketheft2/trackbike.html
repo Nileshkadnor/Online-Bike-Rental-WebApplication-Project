@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Bike</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            background-image: url('bike-tracking.png'); /* Set background image */
+            background-size: cover; /* Cover the entire background */
+            background-position: center; /* Center the background image */
+            background-attachment: fixed; /* Fixed background image */
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background for better readability */
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        #bikeLocation {
+            font-size: 18px;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #map {
+            height: 400px;
+            margin-bottom: 20px;
+        }
+    </style>
+    <script>
+        let map;
+        let bikeMarker;
+
+        function initMap(latitude, longitude) {
+            const bikeLocation = { lat: latitude, lng: longitude }; // Set bike location from ThingSpeak
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: bikeLocation,
+                zoom: 15,
+            });
+
+            // Add bike marker
+            bikeMarker = new google.maps.Marker({
+                position: bikeLocation,
+                map: map,
+                title: "Bike Location",
+                icon: {
+                    url: "bike-icon.png", // URL of bike icon
+                    scaledSize: new google.maps.Size(35, 35), // Adjust size here
+                },
+            });
+
+            document.getElementById("bikeLocation").innerText = `Latitude: ${latitude}, Longitude: ${longitude}`;
+        }
+
+        function updateBikeLocation(latitude, longitude) {
+            const bikeLocation = new google.maps.LatLng(latitude, longitude);
+            bikeMarker.setPosition(bikeLocation);
+            map.panTo(bikeLocation);
+            document.getElementById("bikeLocation").innerText = `Latitude: ${latitude}, Longitude: ${longitude}`;
+        }
+
+        function fetchDataFromThingSpeak() {
+            fetch('https://api.thingspeak.com/channels/2531734/feeds.json?results=1')
+                .then(response => response.json())
+                .then(data => {
+                    const latitude = parseFloat(data.feeds[0].field1);
+                    const longitude = parseFloat(data.feeds[0].field2);
+                    updateBikeLocation(latitude, longitude);
+                })
+                .catch(error => console.error('Error fetching data from ThingSpeak:', error));
+        }
+
+        window.onload = function () {
+            initMap(20.096390, 73.927102); // Initial map with default location
+            setInterval(fetchDataFromThingSpeak, 5000); // Update location every 5 seconds
+        };
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHSfBglWdal7IVNAs0cvNpPB7LnMuNKRY&callback=initMap" async defer></script>
+    <!-- Replace YOUR_GOOGLE_MAPS_API_KEY with your Google Maps API key -->
+</head>
+
+<body>
+    <div class="container">
+        <h2>Track Bike</h2>
+        <div id="bikeLocation"></div>
+        <div id="map"></div>
+    </div>
+</body>
+
+</html>
+
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHSfBglWdal7IVNAs0cvNpPB7LnMuNKRY&callback=initMap" async defer></script> -->
